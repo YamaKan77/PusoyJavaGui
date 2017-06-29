@@ -1,5 +1,7 @@
 package Game;
 
+import javax.swing.ImageIcon;
+
 import Game.Card;
 
 /**
@@ -57,6 +59,17 @@ public class Deck {
             deck[53] = new Card(2,Card.JOKER);
         }
         cardsUsed = 0;
+        cardCt = 0;
+        for ( int suit = 0; suit <= 3; suit++ ) 
+        {
+            for ( int value = 2; value <= 14; value++ ) 
+            {
+                Card c = deck[cardCt];
+                ImageIcon i = new ImageIcon("images/clubs2,png");
+                c.setURL(i);
+                cardCt++;
+            }
+        }
     }
 
     /**

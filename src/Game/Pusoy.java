@@ -444,8 +444,6 @@ public class Pusoy
 	    hand3.ID = "Player 3";
 	    hand4.ID = "Player 4";
 	    
-	    int score1 = 0, score2 = 0, score3 = 0, score4 = 0;
-	    
 	    int x = random.nextInt(10);
 	    for(int i = 0; i < x; i++)
 	    {

@@ -3,6 +3,8 @@ package Game;
 
 import java.util.Comparator;
 
+import javax.swing.ImageIcon;
+
 /**
  * An object of type Card represents a playing card from a
  * standard Poker deck, including Jokers.  The card has a suit, which
@@ -42,6 +44,8 @@ public class Card implements Comparable<Card>
     */
    private final int value;
    
+   public ImageIcon image;
+   
    /**
     * Creates a Joker, with 1 as the associated value.  (Note that
     * "new Card()" is equivalent to "new Card(1,Card.JOKER)".)
@@ -49,6 +53,7 @@ public class Card implements Comparable<Card>
    public Card() {
       suit = JOKER;
       value = 1;
+      image = null;
    }
    
    /**
@@ -97,10 +102,10 @@ public class Card implements Comparable<Card>
     */
    public String getSuitAsString() {
       switch ( suit ) {
-      case SPADES:   return "Spades";
-      case HEARTS:   return "Hearts";
-      case DIAMONDS: return "Diamonds";
-      case CLUBS:    return "Clubs";
+      case SPADES:   return "spades";
+      case HEARTS:   return "hearts";
+      case DIAMONDS: return "diamonds";
+      case CLUBS:    return "clubs";
       default:       return "Joker";
       }
    }
@@ -133,6 +138,11 @@ public class Card implements Comparable<Card>
       }
    }
    
+   public void setURL(ImageIcon url)
+   {
+	   image = url;
+   }
+   
    /**
     * Returns a string representation of this card, including both
     * its suit and its value (except that for a Joker with value 1,
@@ -151,9 +161,9 @@ public class Card implements Comparable<Card>
          return getValueAsString() + " of " + getSuitAsString();
    }
    
-   public void printCard()
+   public String printCard()
    {
-	   System.out.printf("%-6s%s", getValueAsString(), getSuitAsString());
+	   return getValueAsString() + " of " +  getSuitAsString();
    }
    
    public int compareTo(Card c)
