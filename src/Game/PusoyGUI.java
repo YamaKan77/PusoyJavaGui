@@ -68,22 +68,30 @@ public class PusoyGUI
 	public static void main(String[] args) 
 	{
         JFrame window = new JFrame("Pusoy");     
+        window.setMinimumSize(new Dimension(500, 500));
         JTextArea tf = new JTextArea();
         tf.setBounds(50, 50, 150, 300);
         JButton newGame = new JButton( "New Game" );
         newGame.setBounds(50, 350, 95, 30);
         JPanel mainPanel = new JPanel();
-        mainPanel.setSize(390, 375);
+        mainPanel.setSize(400, 400);
         mainPanel.setLayout(new BorderLayout());
        
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(newGame);
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-        mainPanel.add(tf, BorderLayout.CENTER);
+        mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
+//        mainPanel.add(tf, BorderLayout.CENTER);
+        
+        JLayeredPane handPane = new JLayeredPane();
+       
         
         JLabel card = new JLabel(new ImageIcon("images/clubs3.png"));
-        mainPanel.add(card, BorderLayout.EAST);
+//        handPane.setBounds(50, 50, 100, 300);
+        handPane.setPreferredSize(new Dimension(300,400));
+        handPane.setSize(300, 400);
         
+        handPane.add(card);
+        mainPanel.add(handPane, BorderLayout.CENTER);
         
         
         newGame.addActionListener(new ActionListener()
