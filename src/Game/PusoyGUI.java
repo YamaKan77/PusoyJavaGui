@@ -83,13 +83,15 @@ public class PusoyGUI
 //        mainPanel.add(tf, BorderLayout.CENTER);
         
         JLayeredPane handPane = new JLayeredPane();
-       
+        
         
         JLabel card = new JLabel(new ImageIcon("images/clubs3.png"));
+        card.setMinimumSize(new Dimension(500, 500));
+        card.setBorder(BorderFactory.createEmptyBorder(500,500, 500, 500));
 //        handPane.setBounds(50, 50, 100, 300);
-        handPane.setPreferredSize(new Dimension(300,400));
-        handPane.setSize(300, 400);
+//        handPane.setMinimumSize(new Dimension(300,400));
         
+//        mainPanel.add(card);
         handPane.add(card);
         mainPanel.add(handPane, BorderLayout.CENTER);
         
@@ -178,6 +180,7 @@ public class PusoyGUI
 //        window.add(tf);
         window.setSize(400,400);
         window.setLayout(null);
+        window.pack();
         window.setVisible(true);
     }
 	
