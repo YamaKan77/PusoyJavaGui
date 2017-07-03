@@ -10,6 +10,7 @@ import javax.swing.*;
 
 public class PusoyGUI
 {
+	//rank of possible hands in game
 	public final static int ROYAL_FLUSH = 7;
 	public final static int STRAIGHT_FLUSH = 6;
 	public final static int FOUR_KIND = 5;
