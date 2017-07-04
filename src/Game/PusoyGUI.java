@@ -2,10 +2,14 @@ package Game;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class PusoyGUI
@@ -66,7 +70,7 @@ public class PusoyGUI
 	
 
 	
-	public static void main(String[] args) 
+	public static void main(String[] args) throws IOException 
 	{
         JFrame window = new JFrame("Pusoy");     
         window.setMinimumSize(new Dimension(500, 500));
@@ -85,14 +89,21 @@ public class PusoyGUI
         
         JLayeredPane handPane = new JLayeredPane();
         
-        
-        JLabel card = new JLabel(new ImageIcon("images/clubs3.png"));
-        card.setMinimumSize(new Dimension(500, 500));
-        card.setBorder(BorderFactory.createEmptyBorder(500,500, 500, 500));
+//        BufferedImage image;
+//        image = ImageIO.read(new File("images/clubs3.png"));
+//        JLabel card = new JLabel(image);
+//        card.add(image);
+//        card.setMinimumSize(new Dimension(500, 500));
+//        card.setBorder(BorderFactory.createEmptyBorder(300,400, 300, 200));
 //        handPane.setBounds(50, 50, 100, 300);
 //        handPane.setMinimumSize(new Dimension(300,400));
         
 //        mainPanel.add(card);
+        
+        Image img = ImageIO.read(new File("images/clubs3.png"));
+        Image image = img.getScaledInstance(65, 95, java.awt.Image.SCALE_SMOOTH);
+        JButton card = new JButton(new ImageIcon(image));
+        
         handPane.add(card);
         mainPanel.add(handPane, BorderLayout.CENTER);
         
@@ -175,7 +186,7 @@ public class PusoyGUI
         });
         
         
-        card.setBounds(50, 50, 100, 100);
+        card.setBounds(50, 50, 65, 95);
         window.add(mainPanel);
 //        window.add(newGame);
 //        window.add(tf);
