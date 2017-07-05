@@ -66,6 +66,10 @@ public class Hand
 		return hand.size();
 	}
 	
+	public Card get(int i)
+	{
+		return hand.get(i);
+	}
 	/**
 	 * Sorts the hand by card value
 	 */
@@ -213,11 +217,5 @@ public class Hand
 		}
 		return start;
 	}
-	
-	public int numLeft()
-	{
-		return hand.size();
-	}
 
-	
 }

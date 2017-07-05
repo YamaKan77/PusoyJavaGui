@@ -68,7 +68,70 @@ public class PusoyGUI
 		return numLeft;
 	}
 	
-
+	public static void gameStart()
+	{
+		Random random  = new Random();
+		Deck deck = new Deck();
+		
+	    hands.add(hand1);
+	    hands.add(hand2);
+	    hands.add(hand3);
+	    hands.add(hand4);
+	    
+	    playingHands[0] = playingHand1;
+	    playingHands[1] = playingHand2;
+	    playingHands[2] = playingHand3;
+	    playingHands[3] = playingHand4;
+	    
+	    hand1.ID = "Player 1";
+	    hand2.ID = "Player 2";
+	    hand3.ID = "Player 3";
+	    hand4.ID = "Player 4";
+	    
+	    int x = random.nextInt(10);
+	    for(int i = 0; i < x; i++)
+	    {
+	    	deck.shuffle();
+	    }
+	    
+	    int dealTo = 0;
+	    while(deck.cardsLeft() != 0)
+	    {
+	    	if(dealTo == 0)
+	    	{
+	    		hand1.addCard(deck.dealCard());
+	    		dealTo++;
+	    	}
+	    	if(dealTo == 1)
+	    	{
+	    		hand2.addCard(deck.dealCard());
+	    		dealTo++;
+	    	}
+	    	if(dealTo == 2)
+	    	{
+	    		hand3.addCard(deck.dealCard());
+	    		dealTo++;
+	    	}
+	    	if(dealTo == 3)
+	    	{
+	    		hand4.addCard(deck.dealCard());
+	    		dealTo = 0;
+	    	}
+	    }
+	   
+	    
+	    hand1.sortByValue();
+	    hand2.sortByValue();
+	    hand3.sortByValue();
+	    hand4.sortBySuit();
+	    
+	    done1 = hand1.isDone();
+	    done2 = hand2.isDone();
+	    done3 = hand3.isDone();
+	    done4 = hand4.isDone();
+	    
+	    winner = startingPlayer(hand1, hand2, hand3, hand4);
+	}
 	
 	public static void main(String[] args) throws IOException 
 	{
@@ -79,119 +142,57 @@ public class PusoyGUI
         JButton newGame = new JButton( "New Game" );
         newGame.setBounds(50, 350, 95, 30);
         JPanel mainPanel = new JPanel();
-        mainPanel.setSize(400, 400);
+        mainPanel.setLocation(0, 0);
+        mainPanel.setSize(500, 478);
         mainPanel.setLayout(new BorderLayout());
        
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(newGame);
         mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
-//        mainPanel.add(tf, BorderLayout.CENTER);
         
         JLayeredPane handPane = new JLayeredPane();
         
-//        BufferedImage image;
-//        image = ImageIO.read(new File("images/clubs3.png"));
-//        JLabel card = new JLabel(image);
-//        card.add(image);
-//        card.setMinimumSize(new Dimension(500, 500));
-//        card.setBorder(BorderFactory.createEmptyBorder(300,400, 300, 200));
-//        handPane.setBounds(50, 50, 100, 300);
-//        handPane.setMinimumSize(new Dimension(300,400));
+        JButton[] hand1Buttons = new JButton[13];
         
-//        mainPanel.add(card);
+//        Image img = ImageIO.read(new File("images/clubs3.png"));
+//        Image image = img.getScaledInstance(65, 95, java.awt.Image.SCALE_SMOOTH);
+//        JButton card = new JButton(new ImageIcon(image));
         
-        Image img = ImageIO.read(new File("images/clubs3.png"));
-        Image image = img.getScaledInstance(65, 95, java.awt.Image.SCALE_SMOOTH);
-        JButton card = new JButton(new ImageIcon(image));
-        
-        handPane.add(card);
+//        handPane.add(card);
         mainPanel.add(handPane, BorderLayout.CENTER);
         
+        gameStart();
         
+        int x = 6;
+        for(int i = 0; i < hand1.getSize(); i++)
+        {
+        	
+        	
+        	Image img = ImageIO.read(new File(hand1.get(i).fileName));
+            Image image = img.getScaledInstance(65, 95, java.awt.Image.SCALE_SMOOTH);
+            JButton card = new JButton(new ImageIcon(image));
+            card.setBounds(x+=15, 338, 65, 95);
+            hand1Buttons[i] = card;
+        }
+        for(int i = 0; i < hand1Buttons.length; i++)
+        {
+        	handPane.add(hand1Buttons[i], i);
+        }
         newGame.addActionListener(new ActionListener()
         {
         	public void actionPerformed(ActionEvent e)
         	{
-        		Random random  = new Random();
-        		Deck deck = new Deck();
-        		
-        	    hands.add(hand1);
-        	    hands.add(hand2);
-        	    hands.add(hand3);
-        	    hands.add(hand4);
-        	    
-        	    playingHands[0] = playingHand1;
-        	    playingHands[1] = playingHand2;
-        	    playingHands[2] = playingHand3;
-        	    playingHands[3] = playingHand4;
-        	    
-        	    hand1.ID = "Player 1";
-        	    hand2.ID = "Player 2";
-        	    hand3.ID = "Player 3";
-        	    hand4.ID = "Player 4";
-        	    
-        	    int x = random.nextInt(10);
-        	    for(int i = 0; i < x; i++)
-        	    {
-        	    	deck.shuffle();
-        	    }
-        	    
-        	    int dealTo = 0;
-        	    while(deck.cardsLeft() != 0)
-        	    {
-        	    	if(dealTo == 0)
-        	    	{
-        	    		hand1.addCard(deck.dealCard());
-        	    		dealTo++;
-        	    	}
-        	    	if(dealTo == 1)
-        	    	{
-        	    		hand2.addCard(deck.dealCard());
-        	    		dealTo++;
-        	    	}
-        	    	if(dealTo == 2)
-        	    	{
-        	    		hand3.addCard(deck.dealCard());
-        	    		dealTo++;
-        	    	}
-        	    	if(dealTo == 3)
-        	    	{
-        	    		hand4.addCard(deck.dealCard());
-        	    		dealTo = 0;
-        	    	}
-        	    }
-        	   
-        	    
-        	    hand1.sortByValue();
-        	    hand2.sortByValue();
-        	    hand3.sortByValue();
-        	    hand4.sortBySuit();
-        	    
-        	    done1 = hand1.isDone();
-        	    done2 = hand2.isDone();
-        	    done3 = hand3.isDone();
-        	    done4 = hand4.isDone();
-        	    
-        	    winner = startingPlayer(hand1, hand2, hand3, hand4);
-        		
-        	    for(int i = 0; i < hand1.hand.size(); i++)
-        	    {
-        	    	tf.append(hand1.hand.get(i).printCard() + "\n");
-        	    }
-
-        		tf.setEditable(false);
-        		tf.setLineWrap(true);
         		
         	}
         });
         
         
-        card.setBounds(50, 50, 65, 95);
-        window.add(mainPanel);
+        
+        window.getContentPane().add(mainPanel);
 //        window.add(newGame);
 //        window.add(tf);
         window.setSize(400,400);
-        window.setLayout(null);
+        window.getContentPane().setLayout(null);
         window.pack();
         window.setVisible(true);
     }

@@ -1,5 +1,9 @@
 package Game;
 
+import java.awt.Image;
+import java.io.File;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import Game.Card;
@@ -62,11 +66,25 @@ public class Deck {
         cardCt = 0;
         for ( int suit = 0; suit <= 3; suit++ ) 
         {
-            for ( int value = 2; value <= 14; value++ ) 
+            for ( int value = 3; value <= 15; value++ ) 
             {
-                Card c = deck[cardCt];
-                ImageIcon i = new ImageIcon("images/clubs2,png");
-                c.setURL(i);
+            	
+            	if(deck[cardCt].getSuit() == suit && deck[cardCt].getValue() == value)
+            	{
+            		if(deck[cardCt].getValue() < 14)
+            		{
+            			deck[cardCt].fileName = "images/" + deck[cardCt].getSuitAsString() + value + ".png"; 
+            		}
+            		else if(deck[cardCt].getValue() == 14)
+            		{
+            			deck[cardCt].fileName = "images/" + deck[cardCt].getSuitAsString() + "1.png";
+            		}
+            		else if(deck[cardCt].getValue() == 15)
+            		{
+            			deck[cardCt].fileName = "images/" + deck[cardCt].getSuitAsString() + "2.png";
+            		}
+            		
+            	}
                 cardCt++;
             }
         }

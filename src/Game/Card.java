@@ -44,7 +44,7 @@ public class Card implements Comparable<Card>
     */
    private final int value;
    
-   public ImageIcon image;
+   public String fileName;
    
    /**
     * Creates a Joker, with 1 as the associated value.  (Note that
@@ -53,7 +53,7 @@ public class Card implements Comparable<Card>
    public Card() {
       suit = JOKER;
       value = 1;
-      image = null;
+      fileName = null;
    }
    
    /**
@@ -138,9 +138,9 @@ public class Card implements Comparable<Card>
       }
    }
    
-   public void setURL(ImageIcon url)
+   public void setURL(String url)
    {
-	   image = url;
+	   fileName = url;
    }
    
    /**
