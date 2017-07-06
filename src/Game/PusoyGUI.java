@@ -173,6 +173,19 @@ public class PusoyGUI
             JButton card = new JButton(new ImageIcon(image));
             card.setBounds(x+=15, 338, 65, 95);
             hand1Buttons[i] = card;
+            
+            card.addActionListener(new ActionListener()
+            	{
+            		public void actionPerformed(ActionEvent e)
+            		{
+            			if(card.isEnabled())
+            			{
+            				
+            			}
+            			
+            		}
+            	});
+            
         }
         for(int i = 0; i < hand1Buttons.length; i++)
         {
@@ -185,6 +198,8 @@ public class PusoyGUI
         		
         	}
         });
+        
+       
         
         
         
