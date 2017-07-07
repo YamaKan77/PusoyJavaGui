@@ -43,6 +43,7 @@ public class PusoyGUI
 	private static ArrayList<Card> currentHand;
 	private static int currentHandPlayer;
 	private static ArrayList<String> winners = new ArrayList<String>();
+
 	
 	public static int remainingInRound()
 	{
@@ -133,35 +134,30 @@ public class PusoyGUI
 	    winner = startingPlayer(hand1, hand2, hand3, hand4);
 	}
 	
-	public static void main(String[] args) throws IOException 
+	JFrame window = new JFrame("Pusoy");     
+    JButton newGame = new JButton( "New Game" );
+    JPanel mainPanel = new JPanel();
+    JPanel buttonPanel = new JPanel();
+    JButton Pass = new JButton("Pass");
+    JPanel playingHand = new JPanel();
+    JLayeredPane handPane = new JLayeredPane();
+    JButton[] hand1Buttons = new JButton[13];
+    
+    
+    
+	public PusoyGUI() throws IOException
 	{
-        JFrame window = new JFrame("Pusoy");     
-        window.setMinimumSize(new Dimension(500, 500));
-        JTextArea tf = new JTextArea();
-        tf.setBounds(50, 50, 150, 300);
-        JButton newGame = new JButton( "New Game" );
+		window.setMinimumSize(new Dimension(500,500));
         newGame.setBounds(50, 350, 95, 30);
-        JPanel mainPanel = new JPanel();
         mainPanel.setLocation(0, 0);
         mainPanel.setSize(500, 478);
         mainPanel.setLayout(new BorderLayout());
-       
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(newGame);
+        mainPanel.add(handPane, BorderLayout.CENTER);
+        playingHand.setBounds(75, 230, 345, 95);
+        
         mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
         
-        JLayeredPane handPane = new JLayeredPane();
         
-        JButton[] hand1Buttons = new JButton[13];
-        
-//        Image img = ImageIO.read(new File("images/clubs3.png"));
-//        Image image = img.getScaledInstance(65, 95, java.awt.Image.SCALE_SMOOTH);
-//        JButton card = new JButton(new ImageIcon(image));
-        
-//        handPane.add(card);
-        mainPanel.add(handPane, BorderLayout.CENTER);
-        
-        gameStart();
         
         int x = 6;
         for(int i = 0; i < hand1.getSize(); i++)
@@ -173,6 +169,7 @@ public class PusoyGUI
             JButton card = new JButton(new ImageIcon(image));
             card.setBounds(x+=15, 338, 65, 95);
             hand1Buttons[i] = card;
+            System.out.println("i" + hand1Buttons[i]);
             
             card.addActionListener(new ActionListener()
             	{
@@ -180,6 +177,7 @@ public class PusoyGUI
             		{
             			if(card.isEnabled())
             			{
+            				card.setLocation((playingHand.getX() + 5) + (65 * playingHand.getComponents().length), playingHand.getY());
             				
             			}
             			
@@ -187,10 +185,19 @@ public class PusoyGUI
             	});
             
         }
+        
+        Pass.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		hand1.roundDone = true;
+        	}
+        });
+        
         for(int i = 0; i < hand1Buttons.length; i++)
         {
         	handPane.add(hand1Buttons[i], i);
         }
+        
         newGame.addActionListener(new ActionListener()
         {
         	public void actionPerformed(ActionEvent e)
@@ -199,17 +206,26 @@ public class PusoyGUI
         	}
         });
         
-       
-        
-        
-        
-        window.getContentPane().add(mainPanel);
-//        window.add(newGame);
-//        window.add(tf);
-        window.setSize(400,400);
-        window.getContentPane().setLayout(null);
-        window.pack();
-        window.setVisible(true);
+      window.getContentPane().add(mainPanel);
+      
+      handPane.add(playingHand);
+      buttonPanel.add(newGame);
+      buttonPanel.add(Pass);
+      
+	}
+	
+	public void launch()
+	{
+		window.getContentPane().setLayout(null);
+	    window.pack();
+	    window.setVisible(true);
+	}
+	
+	public static void main(String[] args) throws IOException 
+	{
+		PusoyGUI gui = new PusoyGUI();
+		gameStart();
+		gui.launch();
     }
 	
 	private static int startingPlayer(Hand w, Hand x, Hand y, Hand z)
@@ -223,5 +239,4 @@ public class PusoyGUI
 		else
 			return 3;
 	}
-
 }
