@@ -144,6 +144,7 @@ public class PusoyGUI
     JButton[] hand1Buttons = new JButton[13];
     
     
+    private static int action = 0;
     
 	public PusoyGUI() throws IOException
 	{
@@ -157,27 +158,26 @@ public class PusoyGUI
         
         mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
         
-        
+        gameStart();
         
         int x = 6;
+
         for(int i = 0; i < hand1.getSize(); i++)
         {
-        	
-        	
         	Image img = ImageIO.read(new File(hand1.get(i).fileName));
             Image image = img.getScaledInstance(65, 95, java.awt.Image.SCALE_SMOOTH);
             JButton card = new JButton(new ImageIcon(image));
             card.setBounds(x+=15, 338, 65, 95);
             hand1Buttons[i] = card;
-            System.out.println("i" + hand1Buttons[i]);
             
             card.addActionListener(new ActionListener()
             	{
+  
             		public void actionPerformed(ActionEvent e)
             		{
             			if(card.isEnabled())
             			{
-            				card.setLocation((playingHand.getX() + 5) + (65 * playingHand.getComponents().length), playingHand.getY());
+            				card.setLocation((playingHand.getX() + 5) + (65 * action++), playingHand.getY());
             				
             			}
             			
@@ -192,10 +192,10 @@ public class PusoyGUI
         		hand1.roundDone = true;
         	}
         });
-        
         for(int i = 0; i < hand1Buttons.length; i++)
         {
-        	handPane.add(hand1Buttons[i], i);
+        	if(hand1Buttons[i] != null)
+        		handPane.add(hand1Buttons[i], i);
         }
         
         newGame.addActionListener(new ActionListener()
@@ -212,6 +212,7 @@ public class PusoyGUI
       buttonPanel.add(newGame);
       buttonPanel.add(Pass);
       
+      
 	}
 	
 	public void launch()
@@ -223,8 +224,8 @@ public class PusoyGUI
 	
 	public static void main(String[] args) throws IOException 
 	{
+		
 		PusoyGUI gui = new PusoyGUI();
-		gameStart();
 		gui.launch();
     }
 	
