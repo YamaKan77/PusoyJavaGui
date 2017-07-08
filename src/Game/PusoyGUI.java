@@ -146,6 +146,7 @@ public class PusoyGUI
     
     private static int action = 0;
     
+    //Initializes the GUI by adding all components to the window
 	public PusoyGUI() throws IOException
 	{
 		window.setMinimumSize(new Dimension(500,500));
