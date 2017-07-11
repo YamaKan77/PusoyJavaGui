@@ -19,6 +19,7 @@ public class Hand
 	 * An arraylist of cards to hold the possible hand
 	 */
 	ArrayList<Card> hand;
+	Card[] playingHand = new Card[5];
 	
 	boolean roundDone; //If the player has passed in the round
 	boolean gameDone; //If the player has played all of their cards
@@ -36,6 +37,7 @@ public class Hand
 		gameDone = false;
 		start = false;
 		ID = null;
+		playingHand = null;
 	}
 	
 	/**
@@ -50,6 +52,7 @@ public class Hand
 		gameDone = false;
 		start = false;
 		ID = null;
+		playingHand = null;
 	}
 	
 	/**
@@ -59,6 +62,11 @@ public class Hand
 	public void addCard(Card c)
 	{
 		hand.add(c);
+	}
+	
+	public void addToPlayingHand(Card c)
+	{
+		playingHand[playingHand.length] = c;
 	}
 	
 	public int getSize()
