@@ -242,6 +242,9 @@ public class PusoyGUI
       
 	}
 	
+	/**
+	 * Sets the window to visible and allows the GUI to be seen
+	 */
 	public void launch()
 	{
 		window.getContentPane().setLayout(null);
