@@ -40,9 +40,10 @@ public class PusoyGUI
 	private static ArrayList<Card> playingHand3 = new ArrayList<Card>();;
 	private static ArrayList<Card> playingHand4 = new ArrayList<Card>();;
 	private static ArrayList<Card>[] playingHands = (ArrayList<Card>[]) new ArrayList[4];
-	private static ArrayList<Card> currentHand;
+//	private static ArrayList<Card> currentHand;
 	private static int currentHandPlayer;
 	private static ArrayList<String> winners = new ArrayList<String>();
+	private static ArrayList<ArrayList<Card>> currentHand = new ArrayList<ArrayList<Card>>();
 
 	
 	public static int remainingInRound()
@@ -156,7 +157,7 @@ public class PusoyGUI
     
     
     private static int action = 0;
-    private static int index = 0;
+//    private static int value = 0;
     
     //Initializes the GUI by adding all components to the window
 	public PusoyGUI() throws IOException
@@ -173,7 +174,7 @@ public class PusoyGUI
         
         gameStart();
         
-        int x = 6;
+        int x = 100;
         
         for(int i = 0; i < hand1.getSize(); i++)
         {
@@ -182,21 +183,24 @@ public class PusoyGUI
             JButton card = new JButton(new ImageIcon(image));
             card.setBounds(x+=15, 338, 65, 95);
             hand1Buttons[i] = card;
-            index = i;
+            
+            Card c = hand1.get(i);
+            int index = i;
             
             card.addActionListener(new ActionListener()
             	{
   
             		public void actionPerformed(ActionEvent e)
             		{
-            			if(card.isEnabled())
+            			if(card.isEnabled() && hand1.get(index).isSelected == false)
             			{
             				if(action < 5)
             				{
             					card.setLocation((playingHand.getX() + 5) + (65 * action++), playingHand.getY());
             				}
-            				hand1.addToPlayingHand(hand1.get(index++));
-            				
+            				hand1.get(index).isSelected = true;
+            				System.out.println(c.toString());
+            				playingHand1.add(c);
             			}
             			
             		}
@@ -227,8 +231,25 @@ public class PusoyGUI
         Play.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e)
         	{
-        		System.out.println(hand1.playingHand);
-        		
+        		System.out.println(Pusoy.getRank(playingHand1));
+        		if(Pusoy.getRank(playingHand1) > -1)
+        		{
+        			currentHand.add(playingHand1);
+        		}
+        		else
+        		{
+        			Play.setText("Invalid Hand");
+        			ActionListener backToPlay = new ActionListener(){
+        				public void actionPerformed(ActionEvent e)
+        				{
+        					Play.setText("Play");
+        				}
+        			};
+        			Timer timer = new Timer(3000, backToPlay);
+        		    timer.setRepeats(false);
+        		    timer.start();
+        		}
+        		System.out.println(currentHand.size());
         	}
         });
         
@@ -241,6 +262,8 @@ public class PusoyGUI
       
       
 	}
+	
+	
 	
 	/**
 	 * Sets the window to visible and allows the GUI to be seen

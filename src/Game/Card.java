@@ -46,6 +46,8 @@ public class Card implements Comparable<Card>
    
    public String fileName;
    
+   public boolean isSelected;
+   
    /**
     * Creates a Joker, with 1 as the associated value.  (Note that
     * "new Card()" is equivalent to "new Card(1,Card.JOKER)".)
@@ -54,6 +56,7 @@ public class Card implements Comparable<Card>
       suit = JOKER;
       value = 1;
       fileName = null;
+      isSelected = false;
    }
    
    /**
@@ -75,6 +78,7 @@ public class Card implements Comparable<Card>
          throw new IllegalArgumentException("Illegal playing card value");
       value = theValue;
       suit = theSuit;
+      isSelected = false;
    }
 
    /**

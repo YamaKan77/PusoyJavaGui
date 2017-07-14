@@ -490,7 +490,7 @@ public class Pusoy
 	}
 
 
-	private static int getRank(ArrayList<Card> playingHand) 
+	public static int getRank(ArrayList<Card> playingHand) 
 	{
 		if(playingHand != null)
 			playingHand.sort(Card.CardComparator);
