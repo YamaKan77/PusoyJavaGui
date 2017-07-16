@@ -154,14 +154,15 @@ public class PusoyGUI
     JPanel playingHand = new JPanel();
     JLayeredPane handPane = new JLayeredPane();
     JButton[] hand1Buttons = new JButton[13];
-    private static JLayeredPane Hand = new JLayeredPane();
+    JLabel[] playedHand = new JLabel[5];
     
     private static int action = 0;
-    static JLabel card1 = new JLabel("New label");
-    JLabel card2 = new JLabel("New label");
-    JLabel card3 = new JLabel("New label");
-    JLabel card4 = new JLabel("New label");
-    JLabel card5 = new JLabel("New label");
+    private final JTextPane HandToBeat = new JTextPane();
+//    static JLabel card1 = new JLabel("New label");
+//    JLabel card2 = new JLabel("New label");
+//    JLabel card3 = new JLabel("New label");
+//    JLabel card4 = new JLabel("New label");
+//    JLabel card5 = new JLabel("New label");
 
     
 //    private static int value = 0;
@@ -172,17 +173,11 @@ public class PusoyGUI
 		gameStart();
         
         int x = 250;
-        card1.setBounds(0, 0, 65, 95);
-        card2.setBounds(15, 0, 65, 95);
-        card3.setBounds(30, 0, 65, 95);
-        card4.setBounds(45, 0, 65, 95);
-        card5.setBounds(60, 0, 65, 95);
-        
-        Hand.add(card1, 1);
-        Hand.add(card2, 2);
-        Hand.add(card3, 3);
-        Hand.add(card4, 4);
-        Hand.add(card5, 5);
+//        card1.setBounds(0, 0, 65, 95);
+//        card2.setBounds(15, 0, 65, 95);
+//        card3.setBounds(30, 0, 65, 95);
+//        card4.setBounds(45, 0, 65, 95);
+//        card5.setBounds(60, 0, 65, 95);
         
         for(int i = 0; i < hand1.getSize(); i++)
         {
@@ -258,28 +253,37 @@ public class PusoyGUI
         		if(Pusoy.getRank(playingHand1) > -1)
         		{
         			currentHand.add(playingHand1);
-//        			for(int i = 1; i <= playingHand1.size(); i++)
-//        			{
-//        				Image img = null;
-//						try {
-//							img = ImageIO.read(new File(playingHand1.get(i-1).fileName));
-//						} catch (IOException e1) {
-//							// TODO Auto-generated catch block
-//							e1.printStackTrace();
-//						}
-//        	            Image image = img.getScaledInstance(65, 95, java.awt.Image.SCALE_SMOOTH);
-//        	            JLabel card = new JLabel(new ImageIcon(image));
-//        	            card.setBounds(x+=15, 255, 65, 95);
-//        	            Hand.add(card, i);
-//        	            System.out.print(i);
-//        			}
+        			for(int i = 0; i < playingHand1.size(); i++)
+        	        {
+        				
+        	        	Image img = null;
+						try {
+							img = ImageIO.read(new File(playingHand1.get(i).fileName));
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+        	            Image image = img.getScaledInstance(65, 95, java.awt.Image.SCALE_SMOOTH);
+        	            JLabel card = new JLabel(new ImageIcon(image));
+        	            card.setBounds(x+=15, 300, 65, 95);
+        	            playingHand1.get(i).x = x;
+        	            playingHand1.get(i).y = 630;
+        	            playingHand1.get(i).width = 65;
+        	            playingHand1.get(i).height = 95;
+        	            
+        	            playedHand[i] = card;
+        	            
+        	            playingHand1.remove(i);
+        	            
+        	        }
         			
-        			try {
-						PusoyGUI.playHand();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+        			for(int i = 0; i < playedHand.length; i++)
+        			{
+        				if(playedHand[i] != null)
+        	        		handPane.add(playedHand[i], i);
+        				hand1Buttons[i].removeAll();
+        			}
+
         		}
         		else
         		{
@@ -311,11 +315,11 @@ public class PusoyGUI
       
       
       handPane.add(playingHand);
-      Hand.setBounds(320, 255, 125, 95);
+      HandToBeat.setBackground(SystemColor.window);
+      HandToBeat.setText("Hand to beat");
+      HandToBeat.setBounds(340, 275, 81, 16);
       
-      
-      
-      handPane.add(Hand);
+      handPane.add(HandToBeat);
 //      handPane.setMinimumSize(new Dimension(800, 760));
       buttonPanel.setBounds(0, 740, 800, 40);
       window.getContentPane().add(buttonPanel);
@@ -326,19 +330,7 @@ public class PusoyGUI
       
 	}
 	
-	public static void playHand() throws IOException
-	{
-		for(int i = 1; i <= playingHand1.size(); i++)
-		{
-			System.out.println("playHand i: " + playingHand1.get(i-1));
-			Image img = ImageIO.read(new File(playingHand1.get(i-1).fileName));
-			Image image = img.getScaledInstance(65, 95, java.awt.Image.SCALE_SMOOTH);
-			JLabel card = new JLabel(new ImageIcon(image));
-			card.setSize(65, 95);
-			card.setLocation(320, 255);
-			Hand.add(card, i);
-		}
-	}
+
 	
 	/**
 	 * Sets the window to visible and allows the GUI to be seen
