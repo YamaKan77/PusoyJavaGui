@@ -152,17 +152,12 @@ public class PusoyGUI
     JButton Pass = new JButton("Pass");
     JButton Play = new JButton("Play hand");
     JPanel playingHand = new JPanel();
-    JLayeredPane handPane = new JLayeredPane();
+    static JLayeredPane handPane = new JLayeredPane();
     JButton[] hand1Buttons = new JButton[13];
     JLabel[] playedHand = new JLabel[5];
     
     private static int action = 0;
     private final JTextPane HandToBeat = new JTextPane();
-//    static JLabel card1 = new JLabel("New label");
-//    JLabel card2 = new JLabel("New label");
-//    JLabel card3 = new JLabel("New label");
-//    JLabel card4 = new JLabel("New label");
-//    JLabel card5 = new JLabel("New label");
 
     
 //    private static int value = 0;
@@ -173,11 +168,6 @@ public class PusoyGUI
 		gameStart();
         
         int x = 250;
-//        card1.setBounds(0, 0, 65, 95);
-//        card2.setBounds(15, 0, 65, 95);
-//        card3.setBounds(30, 0, 65, 95);
-//        card4.setBounds(45, 0, 65, 95);
-//        card5.setBounds(60, 0, 65, 95);
         
         for(int i = 0; i < hand1.getSize(); i++)
         {
@@ -267,23 +257,29 @@ public class PusoyGUI
         	            JLabel card = new JLabel(new ImageIcon(image));
         	            card.setBounds(x+=15, 300, 65, 95);
         	            playingHand1.get(i).x = x;
-        	            playingHand1.get(i).y = 630;
+        	            playingHand1.get(i).y = 300;
         	            playingHand1.get(i).width = 65;
         	            playingHand1.get(i).height = 95;
         	            
         	            playedHand[i] = card;
         	            
-        	            playingHand1.remove(i);
+        	            System.out.println("Count: " + handPane.getComponentCount());
+        	            System.out.println("Component: " + handPane.getComponent(0).getName());
+        	            
+//        	            handPane.remove(14);
+//        	            playingHand1.remove(i);
         	            
         	        }
-        			
+        			removeFromPlayingHand();
         			for(int i = 0; i < playedHand.length; i++)
         			{
         				if(playedHand[i] != null)
         	        		handPane.add(playedHand[i], i);
-        				hand1Buttons[i].removeAll();
+        				
         			}
-
+        			
+        			window.repaint();
+ 
         		}
         		else
         		{
@@ -298,6 +294,7 @@ public class PusoyGUI
         		    timer.setRepeats(false);
         		    timer.start();
         		}
+       			handPane.add(HandToBeat);
         		System.out.println(" " + currentHand.size());
         	}
         });
@@ -328,6 +325,7 @@ public class PusoyGUI
       buttonPanel.add(Play);
       window.getContentPane().setMinimumSize(new Dimension(800, 800));
       
+//      System.out.println(hand1.singles);
 	}
 	
 
@@ -348,6 +346,26 @@ public class PusoyGUI
 		PusoyGUI gui = new PusoyGUI();
 		gui.launch();
     }
+	
+	public static void removeFromPlayingHand()
+	{
+		Component[] comp = handPane.getComponents();
+		for(int i = 0; i < comp.length; i++)
+		{
+//			System.out.println(i + ". Loc: " + comp[i].getLocation());
+//			System.out.println(i + ". Y: " + comp[i].getY());
+			if(comp[i].getY() == 520)
+			{
+				if(i < comp.length)
+					handPane.remove(i);
+			}
+		}
+//		for(int i = 0; i < playingHand1.size(); i++)
+//		{
+//			playingHand1.remove(i);
+//		}
+		
+	}
 	
 	private static int startingPlayer(Hand w, Hand x, Hand y, Hand z)
 	{

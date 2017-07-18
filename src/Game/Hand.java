@@ -20,6 +20,12 @@ public class Hand
 	 */
 	ArrayList<Card> hand;
 	Card[] playingHand = new Card[5];
+	ArrayList<Card> singles = new ArrayList<Card>();
+	ArrayList<Card> pairs = new ArrayList<Card>();
+	ArrayList<Card> fiveCard = new ArrayList<Card>();
+	
+	
+	
 	
 	boolean roundDone; //If the player has passed in the round
 	boolean gameDone; //If the player has played all of their cards
@@ -38,6 +44,7 @@ public class Hand
 		start = false;
 		ID = null;
 		playingHand = null;
+		getPlayableHand();
 	}
 	
 	/**
@@ -53,6 +60,7 @@ public class Hand
 		start = false;
 		ID = null;
 		playingHand = null;
+		getPlayableHand();
 	}
 	
 	/**
@@ -225,5 +233,30 @@ public class Hand
 		}
 		return start;
 	}
-
+	
+	/**
+	 * Methods for PUSOY AI
+	 */
+	public void getPlayableHand()
+	{
+		int count = 1;
+		for(int i = 0; i < hand.size(); i++)
+		{
+			System.out.print("XXX" + hand.get(i));
+			if(hand.get(i).getValue() == hand.get(i + 1).getValue())
+			{
+				pairs.add(hand.get(i));
+			}
+			if(hand.get(i).getValue() == hand.get(i + 1).getValue() && 
+					hand.get(i + 1).getValue() == hand.get(i + 2).getValue())
+			{
+				fiveCard.add(hand.get(i));
+			}
+			else
+			{
+				singles.add(hand.get(i));
+			}
+		}
+		
+	}
 }
