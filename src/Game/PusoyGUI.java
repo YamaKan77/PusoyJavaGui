@@ -267,7 +267,7 @@ public class PusoyGUI
         	            System.out.println("Component: " + handPane.getComponent(0).getName());
         	            
 //        	            handPane.remove(14);
-//        	            playingHand1.remove(i);
+        	            playingHand1.remove(i);
         	            
         	        }
         			removeFromPlayingHand();
@@ -277,9 +277,8 @@ public class PusoyGUI
         	        		handPane.add(playedHand[i], i);
         				
         			}
-        			
         			window.repaint();
- 
+        			
         		}
         		else
         		{
@@ -294,9 +293,10 @@ public class PusoyGUI
         		    timer.setRepeats(false);
         		    timer.start();
         		}
-       			handPane.add(HandToBeat);
+//       			handPane.add(HandToBeat);
         		System.out.println(" " + currentHand.size());
         	}
+        	
         });
         
       window.setMinimumSize(new Dimension(800,800));
@@ -325,7 +325,10 @@ public class PusoyGUI
       buttonPanel.add(Play);
       window.getContentPane().setMinimumSize(new Dimension(800, 800));
       
-//      System.out.println(hand1.singles);
+      hand1.getPlayableHand();
+      System.out.println("singles" + hand1.singles);
+      System.out.println("pairs" + hand1.pairs);
+      System.out.println("five card" + hand1.fiveCard);
 	}
 	
 
@@ -350,14 +353,14 @@ public class PusoyGUI
 	public static void removeFromPlayingHand()
 	{
 		Component[] comp = handPane.getComponents();
-		for(int i = 0; i < comp.length; i++)
+		for(int i = comp.length; i > 0 ; i++)
 		{
-//			System.out.println(i + ". Loc: " + comp[i].getLocation());
+			System.out.println(i + ". Loc: " + comp[i-1].getY());
 //			System.out.println(i + ". Y: " + comp[i].getY());
-			if(comp[i].getY() == 520)
+			if(comp[i-1].getY() == 520)
 			{
-				if(i < comp.length)
-					handPane.remove(i);
+				if(i <= comp.length)
+					handPane.remove(i-1);
 			}
 		}
 //		for(int i = 0; i < playingHand1.size(); i++)

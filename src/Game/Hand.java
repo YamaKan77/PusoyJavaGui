@@ -44,7 +44,6 @@ public class Hand
 		start = false;
 		ID = null;
 		playingHand = null;
-		getPlayableHand();
 	}
 	
 	/**
@@ -60,7 +59,6 @@ public class Hand
 		start = false;
 		ID = null;
 		playingHand = null;
-		getPlayableHand();
 	}
 	
 	/**
@@ -239,24 +237,43 @@ public class Hand
 	 */
 	public void getPlayableHand()
 	{
-		int count = 1;
-		for(int i = 0; i < hand.size(); i++)
+		for(int i = 0; i < hand.size() - 1; i++)
 		{
-			System.out.print("XXX" + hand.get(i));
-			if(hand.get(i).getValue() == hand.get(i + 1).getValue())
+			
+			if(hand.get(i).getValue() == hand.get(i + 1).getValue() && i + 1 < hand.size())
 			{
-				pairs.add(hand.get(i));
+				if(hand.get(i).getValue() == hand.get(i + 1).getValue() && 
+						hand.get(i + 1).getValue() == hand.get(i + 2).getValue() 
+						&& i + 1 <= hand.size() && i + 2 < hand.size())
+				{
+					fiveCard.add(hand.get(i));
+					fiveCard.add(hand.get(i + 1));
+					fiveCard.add(hand.get(i + 2));
+					i += 3;
+				}
+				else
+				{
+					pairs.add(hand.get(i));
+					pairs.add(hand.get(i + 1));
+					i++;
+				}
+				
 			}
-			if(hand.get(i).getValue() == hand.get(i + 1).getValue() && 
-					hand.get(i + 1).getValue() == hand.get(i + 2).getValue())
+			else if(hand.get(i).getValue() == hand.get(i + 1).getValue() && 
+					hand.get(i + 1).getValue() == hand.get(i + 2).getValue() && i + 1 <= hand.size())
 			{
 				fiveCard.add(hand.get(i));
 			}
-			else
+			else if(hand.get(i).getValue() != hand.get(i + 1).getValue())
 			{
 				singles.add(hand.get(i));
 			}
-		}
 		
+		}
+		if(hand.get(hand.size() - 1) != hand.get(hand.size() - 2))
+		{
+			singles.add(hand.get(hand.size() - 1));
+		}
+
 	}
 }
