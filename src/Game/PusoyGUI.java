@@ -239,15 +239,25 @@ public class PusoyGUI
         	public void actionPerformed(ActionEvent e)
         	{
         		//card stays in playingHand after play
+<<<<<<< HEAD
         		
+=======
+        		System.out.println("XXXsize: " + playingHand1.size());
+>>>>>>> 0a22bad9da5f49dd717a671f92c126bd619a9fbf
         		if(Pusoy.getRank(playingHand1) > -1)
         		{
         			currentHand.add(playingHand1);
         			
+<<<<<<< HEAD
         			System.out.println("XXXsize: " + playingHand1.size());
         			for(int i = 0; i < playingHand1.size(); i++)
         	        {
         				System.out.println("Playinghand i" + playingHand1.get(i));
+=======
+        			for(int i = 0; i < playingHand1.size(); i++)
+        	        {
+        				System.out.println("in loop size: " + playingHand1.size());
+>>>>>>> 0a22bad9da5f49dd717a671f92c126bd619a9fbf
         	        	Image img = null;
 						try {
 							img = ImageIO.read(new File(playingHand1.get(i).fileName));
@@ -265,25 +275,40 @@ public class PusoyGUI
         	            
         	            playedHand[i] = card;
         	            
+<<<<<<< HEAD
         	            System.out.println("Count: " + playedHand.length);
+=======
+        	            System.out.println("Count: " + handPane.getComponentCount());
+>>>>>>> 0a22bad9da5f49dd717a671f92c126bd619a9fbf
         	            System.out.println(i + " Component: " + handPane.getComponent(i));
         	            
 //        	            handPane.remove(14);
-        	            playingHand1.remove(i);
+//        	            playingHand1.remove(i);
         	            
         	            
         	        }
         			
         			removeFromPlayingHand();
+<<<<<<< HEAD
         			
         			for(int i = 0; i < playedHand.length; i++)
         			{
         				System.out.println("OPOP" + playedHand[i]);
+=======
+        			System.out.println("OOL Count: " + handPane.getComponentCount());
+        			for(int i = 0; i < playedHand.length; i++)
+        			{
+     
+>>>>>>> 0a22bad9da5f49dd717a671f92c126bd619a9fbf
         				if(playedHand[i] != null)
         	        		handPane.add(playedHand[i], i);
         				
         			}
+<<<<<<< HEAD
         			System.out.println("OOL Count: " + handPane.getComponentCount());
+=======
+        			
+>>>>>>> 0a22bad9da5f49dd717a671f92c126bd619a9fbf
 //        			handPane.add(HandToBeat, 1);
         			window.repaint();
         			
@@ -362,6 +387,7 @@ public class PusoyGUI
 	public static void removeFromPlayingHand()
 	{
 		Component[] comp = handPane.getComponents();
+<<<<<<< HEAD
 		System.out.println("size: " + comp.length);
 		for(int i = 0; i < comp.length; i++)
 		{
@@ -381,6 +407,21 @@ public class PusoyGUI
 			
 			System.out.println("size: " + comp.length);
 //			System.out.println(i + ". x: " + comp[i].getX());
+=======
+		for(int i = 0; i < comp.length; i++)
+		{
+			
+			System.out.println(i + ". Loc: " + comp[i]);
+			System.out.println(i + ". Y: " + comp[i].getY());
+//			System.out.println(i + ". c: " + comp[i]);
+			if(comp[i].getY() == 520 && comp[i] instanceof JButton)
+			{
+				System.out.println(i + "button: " + comp[i].getY());
+				if(i < comp.length)
+					handPane.remove(i);
+			} 
+			comp = handPane.getComponents();
+>>>>>>> 0a22bad9da5f49dd717a671f92c126bd619a9fbf
 		}
 		
 //		for(int i = 0; i < playingHand1.size(); i++)
