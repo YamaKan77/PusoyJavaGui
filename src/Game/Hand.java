@@ -242,22 +242,19 @@ public class Hand
 			
 			if(hand.get(i).getValue() == hand.get(i + 1).getValue() && i + 1 < hand.size())
 			{
-				if(hand.get(i).getValue() == hand.get(i + 1).getValue() && 
-						hand.get(i + 1).getValue() == hand.get(i + 2).getValue() 
-						&& i + 1 <= hand.size() && i + 2 < hand.size())
-				{
-					fiveCard.add(hand.get(i));
-					fiveCard.add(hand.get(i + 1));
-					fiveCard.add(hand.get(i + 2));
-					i += 3;
-				}
-				else
-				{
 					pairs.add(hand.get(i));
 					pairs.add(hand.get(i + 1));
 					i++;
-				}
 				
+			}
+			else if(hand.get(i).getValue() == hand.get(i + 1).getValue() && 
+					hand.get(i + 1).getValue() == hand.get(i + 2).getValue() 
+					&& i + 1 <= hand.size() && i + 2 <= hand.size())
+			{
+				fiveCard.add(hand.get(i));
+				fiveCard.add(hand.get(i + 1));
+				fiveCard.add(hand.get(i + 2));
+				i += 3;
 			}
 			else if(hand.get(i).getValue() == hand.get(i + 1).getValue() && 
 					hand.get(i + 1).getValue() == hand.get(i + 2).getValue() && i + 1 <= hand.size())
